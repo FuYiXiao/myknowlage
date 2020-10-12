@@ -1,0 +1,117 @@
+<div>
+    this paragraph from index-content.html
+    <a id="linck" >查询USER表</a>
+    <a id="linck2" >查询 knowlege 表</a>
+    <a id="linck3" >新增 knowlege </a>
+    <a id="linck4" >修改 knowlege </a>
+    <a href="http://localhost:3000/users/addUser?uid=5&name=helloMyGod" target="_black">链接新增用户</a>
+</div>
+<div id="My"></div>
+<img src="https://m.qpic.cn/psc?/V504kTd50tP22x3b9HUW3lokEj4IdMHl/ruAMsa53pVQWN7FLK88i5gvUY2d4cYcuwximuExsgH7XjSzRl*Ut5PyRaDLX7mHt.t1s0cjU7BWlUIbqzVAeRPK7J6OJlyIFFIuuhzf00Ac!/b&bo=kAGQAQAAAAABByA!&rf=viewer_4" />
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$("#linck").click(function(){
+      $.ajax({
+		  url: "http://localhost:3000/users/getUserInfo",
+		  cache: false,
+		  success: function(DATA){
+		  	console.log(DATA);
+		    $("#My").html(JSON.stringify(DATA));
+		  }
+		});
+	})
+
+	$("#linck2").click(function(){
+      $.ajax({
+		  url: "http://localhost:3000/knowlege/getKnowlege",
+		  cache: false,
+		  success: function(DATA){
+		  	console.log(DATA);
+		    $("#My").html(JSON.stringify(DATA));
+		  }
+		});
+	})
+
+	function User() {
+      this.ID;
+      this.ParentsID;
+      this.ChildsID;
+      this.HasOver;
+      this.ViewRecords;
+      this.LastViewTime;
+      this.Importance;
+      this.ChildSortArray;
+      this.LabelsArray;
+      this.IsArticle;
+      this.Title;
+      this.Descrptions;
+      this.LinksArray;
+      this.ImagesArray;
+    }
+    var userPerson = new User();
+      //userPerson.ID='';
+      userPerson.ParentsID='';
+      userPerson.ChildsID='';
+      userPerson.HasOver='false';
+      userPerson.ViewRecords='';
+      userPerson.LastViewTime='';
+      userPerson.Importance=2;
+      userPerson.ChildSortArray='';
+      userPerson.LabelsArray='';
+      userPerson.IsArticle='false';
+      userPerson.Title='测试';
+      userPerson.Descrptions=JSON.stringify(['a','b']);
+      // userPerson.Descrptions=['a','b'];
+      userPerson.LinksArray='';
+      userPerson.ImagesArray='';
+     var userPerson2 = new User();
+
+     userPerson2.ID=2;
+      userPerson2.ParentsID='';
+      userPerson2.ChildsID='';
+      userPerson2.HasOver='false';
+      userPerson2.ViewRecords='';
+      userPerson2.LastViewTime='';
+      userPerson2.Importance=2;
+      userPerson2.ChildSortArray='';
+      userPerson2.LabelsArray='';
+      userPerson2.IsArticle='false';
+      userPerson2.Title='测试2';
+      userPerson2.Descrptions=JSON.stringify(['a','b']);
+      userPerson2.LinksArray='';
+      userPerson2.ImagesArray='';
+
+     var result = jQuery.param(userPerson,true);
+
+     console.log("result",result);
+
+	$("#linck3").click(function(){
+      $.ajax({
+		  url: "http://localhost:3000/knowlege/addKnowlege",
+		  data: jQuery.param(userPerson,true),
+		  cache: false,
+		  success: function(DATA){
+		  	console.log(DATA);
+		    $("#My").html(JSON.stringify(DATA));
+		  }
+		});
+	})
+
+	$("#linck4").click(function(){
+      $.ajax({
+		  url: "http://localhost:3000/knowlege/upDataKnowlege",
+		  data: jQuery.param(userPerson2),
+		  cache: false,
+		  success: function(DATA){
+		  	console.log(DATA);
+		    $("#My").html(JSON.stringify(DATA));
+		  }
+		});
+	})
+
+</script>
+
+
+
