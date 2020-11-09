@@ -4,17 +4,17 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+const app = require('../app');
 // 当发布到生产环境的时候，需要将这些调试信息都注释掉，为了方便切换而不需要改动程序代码，可以使用nodejs的debug模块
-var debug = require('debug')('apiserver:server');
-var http = require('http');
+const debug = require('debug')('apiserver:server');
+const http = require('http');
 /**
- * 
+ *
  * Normalize a port into a number, string, or false.
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -29,13 +29,11 @@ function normalizePort(val) {
   return false;
 }
 
-
-
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
@@ -47,18 +45,16 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ? `Pipe ${  port}` : `Port ${  port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error(`${bind  } requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      console.error(`${bind  } is already in use`);
       process.exit(1);
       break;
     default:
@@ -71,13 +67,10 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? `pipe ${  addr}` : `port ${  addr.port}`;
+  debug(`Listening on ${  bind}`);
 }
-
 
 /**
  * Create HTTP server.
@@ -92,4 +85,3 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-

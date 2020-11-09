@@ -1,17 +1,16 @@
-
 // //路由错误处理
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-//路由信息 （接口地址）开始 存放在./routes目录下
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var knowlegeRouter = require('./routes/knowlege');
+// 路由信息 （接口地址）开始 存放在./routes目录下
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const knowlegeRouter = require('./routes/knowlege');
 
-var app = express();
+const app = express();
 
 // 应用程序视图的目录或目录数组。如果一个数组，视图会按照数组中出现的顺序查找
 // app.set(name, value) 将设置项 name 的值设为 value
@@ -32,21 +31,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
 
 // 注册接口
-app.use('/', indexRouter);       //在app中注册routes该接口
-app.use('/users', usersRouter);  //在app中注册users接口
-app.use('/knowlege', knowlegeRouter);  //在app中注册users接口
+app.use('/', indexRouter); // 在app中注册routes该接口
+app.use('/users', usersRouter); // 在app中注册users接口
+app.use('/knowlege', knowlegeRouter); // 在app中注册users接口
 
 // catch 404 and forward to error handler
 // // 当于所有路径都不匹配时,报404,自定义
 // Express 对于没有设定的请求路径，默认会返回 Cat not get xxx
 // 如果你想要定制这个 404
 // 需要通过中间件来配置
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
